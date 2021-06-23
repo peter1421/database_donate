@@ -6,13 +6,9 @@ import try_D
 
 table_name = ["提案人資料", "聯絡窗口", "募資方案", "募資方式", "贊助者資料", "已完成訂單"]
 
-
-
 @app.route('/')
 def show_index():
-    t =try_D.DataBase()
-    content = t. base_show(table_name[2])
-    return render_template('sql_show.html', labels=content[0], content=content[1])
+    return render_template('index.html')
 
 
 @app.route('/welcome')
@@ -25,20 +21,20 @@ def show_welcome():
 def show_all_prouser():
     t = try_D.DataBase()
     content = t. base_show(table_name[0])
-    return render_template('sql_show.html', labels=content[0], content=content[1])
+    return render_template('show_all_prouser.html', labels=content[0], content=content[1])
 
 
 @app.route('/all_spouser')
 def show_all_spouser():
     t = try_D.DataBase()
     content = t. base_show(table_name[4])
-    return render_template('sql_show.html', labels=content[0], content=content[1])
+    return render_template('show_all_spouser.html', labels=content[0], content=content[1])
 
 @app.route('/all_pro')
 def show_all_pro():
     t = try_D.DataBase()
     content = t. base_show(table_name[2])
-    return render_template('sql_show.html', labels=content[0], content=content[1])
+    return render_template('show_all_pro.html', labels=content[0], content=content[1])
 
 
 @app.route('/prouser')
@@ -49,7 +45,7 @@ def show_prouser():
         name=None
     t = try_D.DataBase()
     content = t. base_show(table_name[0], table_name[1], where=name)
-    return render_template('sql_show.html', labels=content[0], content=content[1])
+    return render_template('show_all_prouser.html', labels=content[0], content=content[1])
 
 
 @app.route('/spouser')
@@ -60,7 +56,7 @@ def show_spouser():
         name = None
     t = try_D.DataBase()
     content = t. base_show(table_name[4], table_name[1], where=name)
-    return render_template('sql_show.html', labels=content[0], content=content[1])
+    return render_template('show_all_spouser.html', labels=content[0], content=content[1])
 
 
 @app.route('/pro')
@@ -70,40 +66,29 @@ def show_pro():
     except:
         name = None
     t = try_D.DataBase()
-    content = t. base_show(table_name[2], where=name)
-    return render_template('sql_show.html', labels=content[0], content=content[1])
+    content = t. base_show(table_name[2], table_name[3],where=name)
+    return render_template('show_all_pro.html', labels=content[0], content=content[1])
 
 
-
-@app.route('/self_search')
-def self_search():
-    table1 = request.args.get("table1", "")
-    table2 = request.args.get("table2", "")
-    arr = request.args.get("arr", "")
-    val = "'{}'".format(str(request.args.get("val", "")))
-    t = try_D.DataBase()
-    content = t. base_show(table1, table2,where=val,arr=arr)
-    return render_template('sql_show.html', labels=content[0], content=content[1])
-
-
-@app.route('/search')
-def search():
-    return render_template('search.html', labels=table_name)
 
 
 @app.route('/all_order')
 def show_all_order():
     t = try_D.DataBase()
     content = t. base_show(table_name[5])
-    return render_template('order.html', labels=content[0], content=content[1])
+    return render_template('sql_show.html', labels=content[0], content=content[1])
 
 
 @app.route('/add_order')
 def show_add_order():
-    spo_id = "{}".format(str(request.args.get("spo_id", "")))
-    way_id = "{}".format(str(request.args.get("way_id", "")))
+    spo_id = "{}".format(str(request.args.get("spo_id")))
+    way_id = "{}".format(str(request.args.get("way_id")))
     t = try_D.DataBase()
-    c= t. insert_Completed_order("已完成訂單", spo_id, way_id)
+    print("??",spo_id,way_id,"??")
+    if('None' in spo_id and 'None' in way_id):
+        print("NULL")
+    else:
+        c= t. insert_Completed_order("已完成訂單", spo_id, way_id)
     content = t. base_show(table_name[5])
     return render_template('order.html', labels=content[0], content=content[1])
 
@@ -151,23 +136,19 @@ if __name__=="__main__":
     app.run(port=3000)
 
 
-# @app.route("/cal")
-# def index_c():
-#     max = int(request.args.get("max", ""))
-#     result = 0
-#     for x in range(1, max+1):
-#         result += x
-#     return render_template("result.html", data=result)
+# @app.route('/self_search')
+# def self_search():
+#     table1 = request.args.get("table1", "")
+#     table2 = request.args.get("table2", "")
+#     arr = request.args.get("arr", "")
+#     val = "'{}'".format(str(request.args.get("val", "")))
+#     t = try_D.DataBase()
+#     content = t. base_show(table1, table2,where=val,arr=arr)
+#     return render_template('sql_show.html', labels=content[0], content=content[1])
 
 
-# @app.route("/show")
-# def index_s():
-#     name = request.args.get("n", "")
-#     return "歡迎"+name
-
-
-# @app.route("/page")
-# def index_p():
-#     return render_template("page.html")
+# @app.route('/search')
+# def search():
+#     return render_template('search.html', labels=table_name)
 
 

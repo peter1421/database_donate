@@ -37,7 +37,6 @@ class DataBase():
         return str
 
     def get_auto(self,table_name):
-        # str="{}\n{}\n{}".format(self.select(name="AUTO_INCREMENT"),self.froms("information_schema.TABLES"),self.where("TABLE_NAME",table_name,_id=' '))
         str="""
         SELECT  AUTO_INCREMENT FROM 
         information_schema.TABLES 
@@ -72,15 +71,19 @@ class DataBase():
             print(row)
         return t
 
+
+
+
+
+
+
+
     def insert_Completed_order(self,table_name,sp_id,way_id):
         cur = self.db.cursor()
         str = "INSERT INTO {}(create_time,贊助人ID,方式ID) VALUES('{}','{}','{}')".format(table_name,self.now_time(),sp_id,way_id)
         print("\n-----------------\n使用指令:\n{}\n-----------------\n".format(str))
         cur.execute(str)
-
         self.db.commit()    
-    
-    
     def insert_pro_data(self,proname,arr,money,winid):
         str = """INSERT INTO 提案人資料(提案人名, 成立時間, 產業屬性, 資本額, 聯絡窗口ID) 
         VALUES('{}', '{}', '{}', {}, '{}')""".format(proname,self.now_time(),arr,money,winid)
@@ -99,7 +102,6 @@ class DataBase():
         self.insert_pro_data(proname,arr,money,winid)
         self.insert_win(winid,phone,site,mail)
         print("新增完成")
-
     def insert_sur_data(self, proname, winid):
         str = """INSERT INTO 贊助者資料(贊助人名, 成立時間, 聯絡窗口ID) 
         VALUES('{}', '{}','{}')""".format(proname, self.now_time(), winid)
@@ -107,8 +109,6 @@ class DataBase():
         cur = self.db.cursor()
         cur.execute(str)
         self.db.commit()
-
-    
     def insert_sur(self,surname,phone,site,mail):
         winid = "p"+str(self.get_auto("贊助者資料"))
         self.insert_sur_data(surname,winid)
@@ -136,7 +136,8 @@ class DataBase():
 
 table_name = ["提案人資料", "聯絡窗口", "募資方案", "募資方式", "贊助者資料", "已完成訂單"]
 # t = DataBase()
-
+# a=t.base_show(table_name[2],table_name[3])
+# print(a)
 # t.insert_sur("surname","3333333","site","mail")
 # t.insert_pro_data("賴清德2.0","行政類","999")
 # t.get_auto(table_name[0])

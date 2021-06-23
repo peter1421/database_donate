@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html class="no-js" lang="zh-tw">
 
 <head>
@@ -9,36 +9,37 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <!-- google fonts -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,900,700,300' rel='stylesheet' type='text/css'>
     <!-- all css here -->
     <!-- bootstrap v3.3.6 css -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <!-- animate css -->
-    <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="css/animate.css">
     <!-- jquery-ui.min css -->
-    <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
     <!-- meanmenu css -->
-    <link rel="stylesheet" href="/css/meanmenu.min.css">
+    <link rel="stylesheet" href="css/meanmenu.min.css">
     <!-- RS slider css -->
-    <link rel="stylesheet" type="text/css" href="/lib/rs-plugin/css/settings.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="lib/rs-plugin/css/settings.css" media="screen" />
     <!-- owl.carousel css -->
-    <link rel="stylesheet" href="/css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
     <!-- font-awesome css -->
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <!-- style css -->
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <!-- responsive css -->
-    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <!-- modernizr css -->
-    <script src="/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
+    
 </head>
 
 <body>
@@ -47,7 +48,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                     <div class="logo">
-                        <a href="/"><img src="/img/logo/logo.png" alt="" /></a>
+                        <a href="/"><img src="img/logo/logo.png" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-5 col-sm-5 col-xs-6 hidden-xs">
@@ -102,7 +103,7 @@
                             <ul>
                                 <li>
                                     <div class="cart-img">
-                                        <a href="#"><img src="/img/cart/total-cart.jpg" alt="" /></a>
+                                        <a href="#"><img src="img/cart/total-cart.jpg" alt="" /></a>
                                     </div>
                                     <div class="cart-info">
                                         <h4><a href="#">Vestibulum suscipit</a></h4>
@@ -114,7 +115,7 @@
                                 </li>
                                 <li>
                                     <div class="cart-img">
-                                        <a href="#"><img src="/img/cart/total-cart.jpg" alt="" /></a>
+                                        <a href="#"><img src="img/cart/total-cart.jpg" alt="" /></a>
                                     </div>
                                     <div class="cart-info">
                                         <h4><a href="#">Vestibulum suscipit</a></h4>
@@ -155,22 +156,48 @@
             </div>
         </div>
     </div>
-    <h1>輸入提案者資料</h1>
-    <h2>
-        <form action="/insert/pro">
-            贊助者姓名<input type="text" name="proname" />
-            資本額<input type="text" name="money" />
-            <br>
-            手機號碼<input type="text" name="phone" />
-            產業屬性<input type="text" name="arr" />
-            <br>
-            聯絡地址<input type="text" name="site" />
-            電子信箱<input type="text" name="mail" />
-            <br>
-            <button>添加</button>
-        </form>
-    </h2>
-    <br>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>贊助者資料</h3>
+                <a href="/all_spouser">查看所有贊助者</a>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    {% for i in labels %}
+                                    <td>{{ i }}</td>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in content %}
+                                <tr>
+                                    {% for j in i %}
+                                    <td>{{ j }}</td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <h1>
+                <form action="/spouser">
+                    查看贊助者資料(輸入贊助者ID):<input type="text" name="spouser" />
+                    <button>尋找</button>
+                </form>
+                <a href="/">返回首頁</a>
+            </h1>
+        </div>
+
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
