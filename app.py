@@ -132,6 +132,38 @@ def insert():
     return render_template("insert.html")
 
 
+@app.route('/creat_prodata')
+def creat_prodata():
+    return render_template("insert_prodata.html")
+
+
+@app.route('/creat_prodata_w')
+def prodata():
+    prouserid = "{}".format(str(request.args.get("prouserid", "")))
+    name = "{}".format(str(request.args.get("name", "")))
+    content = "{}".format(str(request.args.get("content", "")))
+
+    t = try_D.DataBase()
+    t.insert_pro_content(prouserid, name, content)
+    return render_template("insert_proway.html")
+
+
+@app.route('/creat_proway')
+def creat():
+    return render_template("insert_proway.html")
+
+@app.route('/creat_proway_w')
+def creat_proway():
+    proid = "{}".format(str(request.args.get("proid", "")))
+    money = "{}".format(str(request.args.get("money", "")))
+    content = "{}".format(str(request.args.get("content", "")))
+
+    t = try_D.DataBase()
+    t.insert_pro_way(proid,money,content)
+    return render_template("index.html")
+
+
+
 if __name__=="__main__":
     app.run(port=3000)
 
