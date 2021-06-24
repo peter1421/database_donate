@@ -100,12 +100,12 @@ class DataBase():
         print("新增完成")
 
         
-    def insert_pro_content(self,proid,name,content):
+    def insert_pro_content(self,proid,name,content,money):
         if(self.count('提案人資料', '提案人資料ID', proid) > 0):
             str="""
-            INSERT INTO 募資方案(提案人資料ID,方案名,提案時間,提案說明)  
-            VALUES('{}','{}','{}','{}')
-            """.format(proid,name,self.now_time(),content)
+            INSERT INTO 募資方案(提案人資料ID,方案名,提案時間,提案說明,目標金額)  
+            VALUES('{}','{}','{}','{}',{})
+            """.format(proid,name,self.now_time(),content,money)
             print("\n-----------------\n使用指令:\n{}\n-----------------\n".format(str))
             cur = self.db.cursor()
             cur.execute(str)

@@ -142,9 +142,10 @@ def prodata():
     prouserid = "{}".format(str(request.args.get("prouserid", "")))
     name = "{}".format(str(request.args.get("name", "")))
     content = "{}".format(str(request.args.get("content", "")))
+    money = "{}".format(str(request.args.get("money", "")))
 
     t = try_D.DataBase()
-    t.insert_pro_content(prouserid, name, content)
+    t.insert_pro_content(prouserid, name, content,money)
     return render_template("insert_proway.html")
 
 
